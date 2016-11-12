@@ -1,12 +1,19 @@
+
+'use strict';
+
+var util = require('util');
+var path = require('path');
+var fs = require('fs');
+//var scraper = require('our code to scrape it yo');
 var Bot = require('slackbots');
 
-var settings = {
-	token: 'xoxb-103811241106-YeoRfDlq3HZO9HusMEC56ATO',
-	name: 'redditbot'
+var RedditBot = function Constructor(settings) {
+	this.settings = settings;
+	this.settings.name = this.settings.name || 'redditbot';
+	this.user = null;
 };
 
-var bot = new Bot(settings);
+//inherits from Constructor
+util.inherits(RedditBot, Bot);
 
-bot.on('start', function() {
-	bot.postMessageToChannel('random', 'Get ready to hear some bullshit');
-});
+module.exports = RedditBot;
