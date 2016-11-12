@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/YHack2016-winners-at-ufl/redditbot/issues"
   },
-  "homepage": "https://github.com/YHack2016-winners-at-ufl/redditbot#readme"
+  "homepage": "https://github.com/YHack2016-winners-at-ufl/redditbot#readme",
+  "dependencies": {
+    "slackbots": "^0.5.3"
+  }
 }
