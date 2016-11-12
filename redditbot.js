@@ -87,4 +87,8 @@ RedditBot.prototype._isMentioningRedditbot = function(message) {
 	message.text.toLowerCase().indexOf(this.name) > -1;
 }
 
+RedditBot.prototype._replyWithRandomRemark = function() {
+	this.postMessageToChannel(this.channels[0].name, "f");
+}
+
 module.exports = RedditBot;
