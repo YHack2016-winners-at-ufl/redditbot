@@ -26,9 +26,12 @@ RedditBot.prototype.run = function() {
 
 RedditBot.prototype._onStart = function() {
 	this._loadBotUser();
+	var that = this;
 
-
-
+	//scraper.scrapeReddit(function(roast){
+	//	console.log("test: " ,roast);
+	//	that._replyWithRandomRemark(roast);
+	//});
 	//this._giveInsultGreeting();
 
 };
@@ -87,8 +90,12 @@ RedditBot.prototype._isMentioningRedditbot = function(message) {
 	message.text.toLowerCase().indexOf(this.name) > -1;
 }
 
-RedditBot.prototype._replyWithRandomRemark = function() {
-	this.postMessageToChannel(this.channels[0].name, "f");
+RedditBot.prototype._replyWithRandomRemark = function(message) {
+	var that = this;
+	scraper.scrapeReddit(function(roast){
+		console.log("test: " ,roast);
+		that.postMessageToChannel(that.channels[0].name, roast);
+	});
 }
 
 module.exports = RedditBot;

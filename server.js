@@ -5,86 +5,93 @@ var express = require('express');
 var fs = require('fs');
 var request = require('request');
 var cheerio = require('cheerio');
+var bot = require('./redditbot');
 var app     = express();
 
-var scrapeReddit = function(){
+var callback = function(roast){
+  //do something with roast
+    bot._onMessage(roast);
+};
 
-    //All the web scraping magic will happen here
+var scraper = {
+    counter: 0,
+    url: 'https://www.reddit.com/r/RoastMe/',
+    scrapeReddit: function(callback) {
+        var that = this;
+        //All the web scraping magic will happen here
 
-    url = 'https://www.reddit.com/r/RoastMe/';
-    // The structure of our request call
-    // The first parameter is our URL
-    // The callback function takes 3 parameters, an error, response status code and the html
+        // The structure of our request call
+        // The first parameter is our URL
+        // The callback function takes 3 parameters, an error, response status code and the html
+        roasts = [];
 
-    request(url, function(error, response, html){
+        request( this.url, function (error, response, html) {
 
-        // First we'll check to make sure no errors occurred when making the request
+            // First we'll check to make sure no errors occurred when making the request
 
-        if(!error){
-            // Next, we'll utilize the cheerio library on the returned html which will essentially give us jQuery functionality
+            if ( !error ) {
+                // Next, we'll utilize the cheerio library on the returned html which will essentially give us jQuery functionality
 
-            var $ = cheerio.load(html);
+                var $ = cheerio.load( html );
+                var roastPages = [];
 
-            $('.comments').filter(function(){
+                $( '.comments' ).filter( function () {
 
-                // Let's store the data we filter into a variable so we can easily see what's going on.
+                    // Let's store the data we filter into a variable so we can easily see what's going on.
+                    var data = $( this );
 
-                var data = $(this);
+                    // In examining the DOM we notice that the title rests within the first child element of the header tag.
+                    // Utilizing jQuery we can easily navigate and get the text by writing the following code:
 
-                // In examining the DOM we notice that the title rests within the first child element of the header tag.
-                // Utilizing jQuery we can easily navigate and get the text by writing the following code:
+                    //roast = data.text();
+                    roastPages.push( data[0].attribs.href );
 
-                //roast = data.text();
-                urls = data[0].attribs.href;
-                console.log(urls);
+                } );
+                //console.log(roastPages);
 
-
-                request(urls, function(error, response, html){
-
+                request( roastPages[1], function (error, response, html) {
                     // First we'll check to make sure no errors occurred when making the request
 
-                    if(!error) {
+                    if ( !error ) {
                         // Next, we'll utilize the cheerio library on the returned html which will essentially give us jQuery functionality
 
                         $ = cheerio.load( html );
 
-                        $('.md').filter(function() {
-                            data = $(this);
+                        $( '.md' ).filter( function () {
+                            data = $( this );
                             stuff = data.children();
-
-                            if(data.children()[0].name == "p"){
+                            //console.log(stuff);
+                            if ( data.children()[0].name == "p" ) {
                                 var roast = stuff[0].children[0].data;
-                                console.log(roast);
-                                fs.writeFile('data.txt', roast + "\n", function(err) {
-                                    if(err) throw err;
-                                });
+                                roasts.push( roast );
+                                //console.log(roast);
                             }
-
-
-                            return "Wrote data to file";
-
-                            //comment = data[0].children().first().text();
-                            //console.log(comment);
+                        } );
+                        fs.writeFile(
+                            "data.txt",
+                            JSON.stringify(roasts),
+                            function (err) {
+                                if (err) {
+                                    console.error('Crap happens');
+                                }
                         });
-
-
-
+                        console.log( "counter: ", that.counter);
+                        callback(roasts[that.counter]);
+                        that.counter++;
                     }
-                });
+                } );
 
-                // Once we have our title, we'll store it to the our json object.
+            }
+        } );
+    }
 
-            });
-            // Finally, we'll define the variables we're going to capture
 
-            var roast;
-            var json = { roast : ""};
-        }
-    });
-};
+}
+
+
 
 app.listen('8081');
 
 console.log('Magic happens on port 8081');
 
-module.exports = scrapeReddit();
+module.exports = scraper;
