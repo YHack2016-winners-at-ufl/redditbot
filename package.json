@@ -1,0 +1,19 @@
+{
+  "name": "redditbot",
+  "version": "1.0.0",
+  "description": "say stuff to me bb",
+  "main": "index.js",
+  "scripts": {
+    "test": "fuckmeupfam"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YHack2016-winners-at-ufl/redditbot.git"
+  },
+  "author": "Troy Halpin, Josh Benner, Denzel Mathew",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/YHack2016-winners-at-ufl/redditbot/issues"
+  },
+  "homepage": "https://github.com/YHack2016-winners-at-ufl/redditbot#readme"
+}
