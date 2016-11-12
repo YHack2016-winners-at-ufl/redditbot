@@ -66,4 +66,5 @@ RedditBot.prototype._isChatMessage = function(message) {
 	return message.type === 'message' && Boolean(message.text);
 }
 
+
 module.exports = RedditBot;
