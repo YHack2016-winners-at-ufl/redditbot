@@ -81,7 +81,7 @@ var scrapeReddit = function(){
             var json = { roast : ""};
         }
     });
-}
+};
 
 app.listen('8081');
 

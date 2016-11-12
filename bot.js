@@ -8,9 +8,7 @@ fs.readFile('keys.txt', 'utf8', function (err,data) {
     return console.log(err);
   }
   slackToken = data;
-});
-
-var settings = {
+	var settings = {
 	token: slackToken,
 	name: 'redditbot'
 };
@@ -20,3 +18,6 @@ bot.run();
 bot.on('start', function() {
 	bot.postMessageToChannel('random', 'Get ready to hear some bullshit');
 });
+});
+
+

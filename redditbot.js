@@ -5,7 +5,7 @@ var util = require('util');
 var path = require('path');
 var fs = require('fs');
 
-var scraper = require('scrapeReddit');
+var scraper = require('./server.js');
 var Bot = require('slackbots');
 
 var RedditBot = function Constructor(settings) {
@@ -28,9 +28,8 @@ RedditBot.prototype._onStart = function() {
 	this._loadBotUser();
 
 
-	var msg = scraper();
-	console.log(msg);
-	this._giveInsultGreeting();
+
+	//this._giveInsultGreeting();
 
 };
 
