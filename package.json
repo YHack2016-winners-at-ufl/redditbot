@@ -17,6 +17,9 @@
   },
   "homepage": "https://github.com/YHack2016-winners-at-ufl/redditbot#readme",
   "dependencies": {
+    "cheerio": "0.22.0",
+    "express": "4.14.0",
+    "request": "2.78.0",
     "slackbots": "^0.5.3"
   }
 }
