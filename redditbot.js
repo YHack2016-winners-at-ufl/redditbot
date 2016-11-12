@@ -16,25 +16,20 @@ var RedditBot = function Constructor(settings) {
 //inherits from Constructor
 util.inherits(RedditBot, Bot);
 
+//runs the bot
 RedditBot.prototype.run = function() {
-	
 	RedditBot.super_.call(this, this.settings);
-
 	this.on('start', this._onStart);
 	this.on('message', this._onMessage);
 };
 
 RedditBot.prototype._onStart = function() {
-	
 	this._loadBotUser();
-	
 	//set up scraper here
-
-	this._giveInsultGreeting();
 };
 
 RedditBot.prototype._loadBotUser = function() {
-	
+
 	var self = this;
 	//users returned as array, filter to find the bot in that array
 	this.user = this.users.filter(function(user) {
@@ -57,7 +52,7 @@ RedditBot.prototype._giveGreeting = function() {
 };
 
 RedditBot.prototype._onMessage = function(message) {
-	if (this._isChatMessage(message) && 
+	if (this._isChatMessage(message) &&
 		this._isChannelConversation(message) &&
 		!this._isFromRedditbot(message) &&
 		this._isMentioningRedditbot(message)) {
