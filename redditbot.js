@@ -71,5 +71,20 @@ RedditBot.prototype._isChatMessage = function(message) {
 	return message.type === 'message' && Boolean(message.text);
 }
 
+RedditBot.prototype._isChannelConversation = function(message) {
+
+	return typeof message.channel === 'string' && message.channel[0] === 'C';
+}
+
+RedditBot.prototype._isFromRedditbot = function(message) {
+
+	return message.user === this.user.id;
+}
+
+RedditBot.prototype._isMentioningRedditbot = function(message) {
+
+	return message.text.toLowerCase().indexOf('roast me') > -1 ||
+	message.text.toLowerCase().indexOf(this.name) > -1;
+}
 
 module.exports = RedditBot;
