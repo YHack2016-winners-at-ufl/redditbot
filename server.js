@@ -147,10 +147,11 @@ var scraper = {
     }
 }
 
+app.use('/', express.static('public'));
 
+app.listen(5000, function (){
+    console.log("Savagery happens on port 5000");
+});
 
-app.listen('8081');
-
-console.log('Savagery happens on port 8081');
 
 module.exports = scraper;
