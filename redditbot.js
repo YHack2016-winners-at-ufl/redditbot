@@ -4,7 +4,7 @@ var util = require('util');
 var path = require('path');
 var fs = require('fs');
 var _ = require('lodash');
-
+var sentiment = require('sentiment');
 var webapi = require('./web-api');
 
 var scraper = require('./server.js');
@@ -127,9 +127,11 @@ RedditBot.prototype._replyWithMarkovRemark = function(message) {
 		that.postMessageToChannel('joshtest', roast)});
 
 	scraper.generateRoast(function(roast){
-		//console.log("test: " ,roast);
-		that.postMessageToChannel('joshtest', "Here's something I came up with myself: \n" + roast);
+		that.postMessageToChannel('random', "Here's something I came up with myself: \n" + roast, function(){
+      var s1 = sentiment(roast);
+      that.postMessageToChannel('random', "Sentiment Analysis of this post: " + s1.score);
+    });
 	});
-};
+}
 
 module.exports = RedditBot;
