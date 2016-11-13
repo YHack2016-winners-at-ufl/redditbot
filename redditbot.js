@@ -115,30 +115,39 @@ RedditBot.prototype._replyWithRandomRemark = function(message) {
 
         userName = user.name;
         scraper.getRoast(function(roast) {
-            self.postMessageToChannel('random', '@' + userName + ' ' + "Reddit thought this about you: \n" + roast.msg + "Sentiment Score Analysis: " + roast.score.score);
+            self.postMessageToChannel('random', '@' + userName + ' ' + "Reddit thought this about you: \n" + roast.msg + "\n Sentiment Score Analysis: " + roast.score.score);
         });
     });
 };
 
+
 RedditBot.prototype._replyWithMarkovRemark = function(message) {
-  var self = this;
-  webapi.userInfo(message.user, function(user) {
-      //console.log('user', user)
-      if (!user) {
-          console.log('error on userinfo');
-          return;
-      }
+    var that = this;
 
-      var userName;
-      var chIdx = _.findIndex(self.channels, function(_channel) {
-          return _channel.name == channelName;
-      });
-
-
-      userName = user.name;
-      scraper.getRoast(function(roast) {
-          self.postMessageToChannel('random', '@' + userName + ' ' + "Here's something I came up by myself: \n" + roast.msg + "Sentiment Score Analysis: " + roast.score.score);
-      });
-  });
+    scraper.generateRoast(function(roast){
+        that.postMessageToChannel('random', "Here's something I came up with myself: \n" + roast.msg + "\n Sentiment Score Analysis: " + roast.score.score);
+    });
 }
+
+// RedditBot.prototype._replyWithMarkovRemark = function(message) {
+//   var self = this;
+//   webapi.userInfo(message.user, function(user) {
+//       //console.log('user', user)
+//       if (!user) {
+//           console.log('error on userinfo');
+//           return;
+//       }
+//
+//       var userName;
+//       var chIdx = _.findIndex(self.channels, function(_channel) {
+//           return _channel.name == channelName;
+//       });
+//
+//
+//       userName = user.name;
+//       scraper.generateRoast(function(roast) {
+//           self.postMessageToChannel('random', '@' + userName + ' ' + "Here's something I came up by myself: \n" + roast.msg + "Sentiment Score Analysis: " + roast.score.score);
+//       });
+//   });
+// }
 module.exports = RedditBot;
