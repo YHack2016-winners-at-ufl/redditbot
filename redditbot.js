@@ -115,7 +115,10 @@ RedditBot.prototype._replyWithRandomRemark = function(message) {
 
         userName = user.name;
         scraper.getRoast(function(roast) {
-            self.postMessageToChannel('joshtest', '@' + userName + ' ' + "Reddit thought this about you: " + roast);
+            self.postMessageToChannel('joshtest', '@' + userName + ' ' + "Reddit thought this about you: \n" + roast.msg + "Sentiment Score Analysis: " + roast.score.score, function(){
+              var s1 = sentiment(roast);
+              self.postMessageToChannel('joshtest', "callback value is: " + s1);
+            });
         });
     });
 };
@@ -123,15 +126,19 @@ RedditBot.prototype._replyWithRandomRemark = function(message) {
 RedditBot.prototype._replyWithMarkovRemark = function(message) {
 	var that = this;
 
-	scraper.getRoast(function(roast){
-		that.postMessageToChannel('joshtest', roast)});
+	// scraper.getRoast(function(roast){
+	// 	that.postMessageToChannel('joshtest', roast, function(){
+  //     var s1 = sentiment(roast);
+  //     that.postMessageToChannel('joshtest', )
+  //   })
+  // });
+
 
 	scraper.generateRoast(function(roast){
-		that.postMessageToChannel('random', "Here's something I came up with myself: \n" + roast, function(){
+		that.postMessageToChannel('random', "Here's something I came up with myself: \n" + roast.msg + "Sentiment Score Analysis: " + roast.score.score,function(){
       var s1 = sentiment(roast);
-      that.postMessageToChannel('random', "Sentiment Analysis of this post: " + s1.score);
+      self.postMessageToChannel('joshtest', "callback value is: " + s1);
     });
-	});
+  });
 }
-
 module.exports = RedditBot;

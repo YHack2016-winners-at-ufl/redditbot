@@ -7,13 +7,15 @@ var request = require('request');
 var cheerio = require('cheerio');
 var bot = require('./redditbot');
 var _ = require('underscore');
+var sentiment = require('sentiment');
 var Chain = require('markov-chains').default;
 var app     = express();
 
 
-function Roast(message,votes){
+function Roast(message,votes, score){
     this.msg = message || "";
     this.upvotes = votes || 0;
+    this.score = score || 0;
 }
 
 var callback = function(roast){
@@ -79,8 +81,9 @@ var scraper = {
                                     var roast = "";
                                     if ( data.children()[0].name == "p" ) {
                                         roast = stuff[0].children[0].data;
+                                        score = sentiment(roast);
                                         //roasts.push( roast );
-                                        that.roasts.push(new Roast(roast,parseInt(votes.split(" ")[0])));
+                                        that.roasts.push(new Roast(roast,parseInt(votes.split(" ")[0]),score));
                                     }
                                     //console.log("roast: " , roast, " votes: ", votes);
                                 }
@@ -89,7 +92,7 @@ var scraper = {
                         that.roasts = _.sortBy(that.roasts, 'upvotes' ).reverse();
                         that.roasts = _.filter(that.roasts, function(num){ return num.upvotes >= 4; });
                         //console.log(that.roasts);
-                        callback(new Roast("bot started",0));
+                        callback(new Roast("bot started",0 , {score: { score: 0}}));
                     }
                 } );
                 });
@@ -114,9 +117,9 @@ var scraper = {
     getRoast: function(callback){
         var msg = this.roasts[this.counter];
         this.counter++;
-        console.log(msg);
+
         console.log(msg.msg);
-        callback(msg.msg);
+        callback(msg);
     },
     fillStates: function() {
         console.log("inside fillStates");
@@ -132,12 +135,15 @@ var scraper = {
         console.log("inside generateRoast");
         this.fillStates();
         var chain = new Chain(this.states);
-        // generate a forecast 
-        const markovRoast = chain.walk(); 
-        console.log("markov roast: " + markovRoast);
+        // generate a forecast
+        const markovRoastArr = chain.walk();
+        console.log("markov roast: " + markovRoastArr);
 
-        var roast = markovRoast[0];
-        callback(roast);
+
+        var roast = markovRoastArr[0];
+        markovRoast = new Roast(roast, 0, sentiment(roast));
+        
+        callback(markovRoast);
     }
 }
 
