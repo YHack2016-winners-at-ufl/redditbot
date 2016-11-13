@@ -16,7 +16,7 @@ fs.readFile('keys.txt', 'utf8', function (err,data) {
 var bot = new RedditBot(settings);
 bot.run();
 bot.on('start', function() {
-	bot.postMessageToChannel('random', 'Get ready to hear some bullshit');
+	bot.postMessageToChannel('joshtest', 'Get ready to hear some bullshit');
 });
 });
 
