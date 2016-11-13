@@ -123,7 +123,6 @@ RedditBot.prototype._replyWithRandomRemark = function(message) {
 
 RedditBot.prototype._replyWithMarkovRemark = function(message) {
     var that = this;
-
     scraper.generateRoast(function(roast){
         that.postMessageToChannel('random', "Here's something I came up with myself: \n" + roast.msg + "\n Sentiment Score Analysis: " + roast.score.score);
     });

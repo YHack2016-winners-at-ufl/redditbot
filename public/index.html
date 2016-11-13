@@ -1,13 +1,134 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>PlzRoastMe</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-</head>
-<body>
-    <h1 style="text-align: center">PlzRoastMe</h1>
-    <p class="roastMsg" style="text-align: center"></p>
-    <p style="text-align: center;"> <input type="submit" onclick="" value="Roast Me"></p>
-</body>
+<!DOCTYPE HTML>
+<!--
+	Read Only by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Read Only by HTML5 UP</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]>
+		<script src="../assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="../assets/css/main.css" />
+		<!--[if lte IE 8]>
+		<link rel="stylesheet" href="../assets/css/ie8.css"/><![endif]-->
+
+		<script src="../charts.js">
+		</script>
+	</head>
+	<body>
+
+		<!-- Header -->
+			<section id="header">
+				<header>
+					<span class="image avatar"><img src="../images/emoji_icon.png" alt="" /></span>
+					<h1 id="logo"><a href="#">@roastmebot</a></h1>
+					<p>Markov and Reddit's most acerbic wits have made a monster out of me</p>
+				</header>
+				<nav id="nav">
+					<ul>
+						<li><a href="#one" class="active">About</a></li>
+						<li><a href="#two">Frequency Plots</a></li>
+						<!-- <li><a href="#three">Sentiment vs Score</a></li> -->
+						<!-- <li><a href="#four">Reddit vs Markov</a></li> -->
+					</ul>
+				</nav>
+				<footer>
+					<ul class="icons">
+						<li><a href="https://github.com/YHack2016-winners-at-ufl/redditbot" class="icon fa-github"><span class="label">Github</span></a></li>
+					</ul>
+				</footer>
+			</section>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+
+						<!-- One -->
+							<section id="one">
+								<div class="container">
+									<header class="major">
+										<h2>Roast Me</h2>
+										<p>Just an incredibly rude slackbot. <a href="https://reddit.com/r/roastme"><i>The subreddit that started it all</i></a>.</p>
+									</header>
+									<p>We scraped the top posts of r/roastme and added it to a slackbot, because 
+										sometimes the slack channel just isn't exciting enough. Additionally, we 
+										used a Markov Chain library so that our little bot could come up with some
+										roasts of his own. </p>
+
+										<p> We performed sentiment analysis on both the reddit comments
+										and our self-generated roasts, with the data results shown below. We were 
+										pleasantly amused to discover that the sarcastic posts often show up as "happy", creating some interesting metrics. And more than pleasantly amused at
+										just how twisted our little bot had become. We hope you enjoy our results as much as we do. </p>
+								</div>
+							</section>
+
+						<!-- Two -->
+							<section id="two">
+								<div class="container">
+									<h3>Frequency Plots</h3>
+									<p>Below we have charts of the frequency of sentiments from the top 1500 roast comments.</p>
+									<canvas id="canvas" height="450" width="750"></canvas>
+								</div>
+							</section>
+
+						<!-- Three -->
+							<!-- <section id="three">
+								<div class="container">
+									<h3>A Few Accomplishments</h3>
+									<p>Integer eu ante ornare amet commetus vestibulum blandit integer in curae ac faucibus integer non. Adipiscing cubilia elementum integer. Integer eu ante ornare amet commetus.</p>
+									<div class="features">
+										<article>
+											<a href="#" class="image"><img src="images/pic01.jpg" alt="" /></a>
+											<div class="inner">
+												<h4>Possibly broke spacetime</h4>
+												<p>Integer eu ante ornare amet commetus vestibulum blandit integer in curae ac faucibus integer adipiscing ornare amet.</p>
+											</div>
+										</article>
+										<article>
+											<a href="#" class="image"><img src="images/pic02.jpg" alt="" /></a>
+											<div class="inner">
+												<h4>Terraformed a small moon</h4>
+												<p>Integer eu ante ornare amet commetus vestibulum blandit integer in curae ac faucibus integer adipiscing ornare amet.</p>
+											</div>
+										</article>
+										<article>
+											<a href="#" class="image"><img src="images/pic03.jpg" alt="" /></a>
+											<div class="inner">
+												<h4>Snapped dark matter in the wild</h4>
+												<p>Integer eu ante ornare amet commetus vestibulum blandit integer in curae ac faucibus integer adipiscing ornare amet.</p>
+											</div>
+										</article>
+									</div>
+								</div>
+							</section> -->
+					</div>
+
+				<!-- Footer -->
+					<section id="footer">
+						<div class="container">
+							<ul class="copyright">
+								<li>&copy; Untitled. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+							</ul>
+						</div>
+					</section>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="../assets/js/jquery.min.js"></script>
+			<script src="../assets/js/jquery.scrollzer.min.js"></script>
+			<script src="../assets/js/jquery.scrolly.min.js"></script>
+			<script src="../assets/js/skel.min.js"></script>
+			<script src="../assets/js/util.js"></script>
+			<!--[if lte IE 8]>
+		<script src="../assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="../assets/js/main.js"></script>
+			<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.bundle.min.js"></script>
+
+	</body>
 </html>
