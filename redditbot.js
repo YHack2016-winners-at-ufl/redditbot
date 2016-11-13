@@ -8,11 +8,13 @@ var fs = require('fs');
 var scraper = require('./server.js');
 var Bot = require('slackbots');
 
+
 var RedditBot = function Constructor(settings) {
 	this.settings = settings;
 	this.settings.name = this.settings.name || 'a';
 	this.user = null;
 };
+
 
 //inherits from Constructor
 util.inherits(RedditBot, Bot);
@@ -93,7 +95,6 @@ RedditBot.prototype._isMentioningRedditbot = function(message) {
 RedditBot.prototype._replyWithRandomRemark = function(message) {
 	var that = this;
 	scraper.getRoast(function(roast){
-		//console.log("test: " ,roast);
 		that.postMessageToChannel('joshtest', roast);
 	});
 }

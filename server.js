@@ -9,6 +9,7 @@ var bot = require('./redditbot');
 var _ = require('underscore');
 var app     = express();
 
+
 function Roast(message,votes){
     this.msg = message || "";
     this.upvotes = votes || 0;
@@ -115,6 +116,6 @@ var scraper = {
 
 app.listen('8081');
 
-console.log('Magic happens on port 8081');
+console.log('Savagery happens on port 8081');
 
 module.exports = scraper;

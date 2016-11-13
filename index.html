@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PlzRoastMe</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+</head>
+<body>
+    <h1 style="text-align: center">PlzRoastMe</h1>
+    <p class="roastMsg" style="text-align: center"></p>
+    <p style="text-align: center;"> <input type="submit" onclick="" value="Roast Me"></p>
+<script type="application/javascript">
+    $(document).ready(function(){
+        $.ajax('./getRoasted' ).done(function(resp){
+            console.log(resp);
+            //$.('.roastMsg').innerHTML = resp;
+        });
+    });
+</script>
+</body>
+</html>
