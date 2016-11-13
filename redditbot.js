@@ -29,8 +29,8 @@ RedditBot.prototype._onStart = function() {
 	var that = this;
 
 	scraper.scrapeReddit(function(msg){
-	//	console.log("test: " ,roast);
-		that._replyWithRandomRemark(msg);
+		console.log("test: ", msg);
+		//that._replyWithRandomRemark(msg);
 	});
 	//this._giveInsultGreeting();
 
@@ -63,7 +63,7 @@ RedditBot.prototype._onMessage = function(message) {
 	if (this._isChatMessage(message) &&
 		this._isChannelConversation(message) &&
 		!this._isFromRedditbot(message) &&
-		this._isMentioningRedditbot(message)) {
+		this._isMentioningRedditbot(message))  {
 
 		this._replyWithRandomRemark(message);
 	}
@@ -93,7 +93,7 @@ RedditBot.prototype._isMentioningRedditbot = function(message) {
 RedditBot.prototype._replyWithRandomRemark = function(message) {
 	var that = this;
 	scraper.getRoast(function(roast){
-		console.log("test: " ,roast);
+		//console.log("test: " ,roast);
 		that.postMessageToChannel('joshtest', roast);
 	});
 }

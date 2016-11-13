@@ -53,9 +53,11 @@ var scraper = {
                     roastPages.push( data[0].attribs.href );
 
                 } );
+                //roastPages.shift();
                 //console.log(roastPages);
-
-                request( roastPages[1], function (error, response, html) {
+                roastPages.forEach(function(thread)
+                {
+                    request( thread, function (error, response, html) {
                     // First we'll check to make sure no errors occurred when making the request
 
                     if ( !error ) {
@@ -82,11 +84,13 @@ var scraper = {
                         that.roasts = _.sortBy(that.roasts, 'upvotes' ).reverse();
                         that.roasts = _.filter(that.roasts, function(num){ return num.upvotes >= 4; });
                         //console.log(that.roasts);
-                        //var msg = that.roasts[that.counter];
-                        //that.counter = that.counter++;
-                        callback("Bot has started");
+                        callback(new Roast("bot started",0));
                     }
                 } );
+                });
+
+                that.roasts = _.sortBy(that.roasts, 'upvotes' ).reverse();
+                that.roasts = _.filter(that.roasts, function(num){ return num.upvotes >= 4; });
                 //Write to data.txt
                 fs.writeFile(
                      "data.txt",
@@ -105,8 +109,6 @@ var scraper = {
         this.counter++;
         callback(msg.msg);
     }
-
-
 }
 
 
