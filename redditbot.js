@@ -14,7 +14,7 @@ var channelName = 'mentions';
 
 var RedditBot = function Constructor(settings) {
     this.settings = settings;
-    this.settings.name = this.settings.name || 'redditbot';
+    this.settings.name = this.settings.name || 'a';
     this.user = null;
 };
 
@@ -30,6 +30,12 @@ RedditBot.prototype.run = function() {
 
 RedditBot.prototype._onStart = function() {
     this._loadBotUser();
+    var that = this;
+
+    scraper.scrapeReddit(function(msg) {
+        //console.log("test: ", msg);
+        //that._replyWithRandomRemark(msg);
+    });
     //this._giveInsultGreeting();
 };
 
@@ -51,22 +57,17 @@ RedditBot.prototype._giveGreeting = function() {
 
     var randomNumber = this._getInsultOrCompliment();
     var opening = ((randomNumber === 0) ? "Hello shitstains" : "Hello beautiful people");
-    var chIdx = _.findIndex(this.channels, function(_channel) {
-        return _channel.name == channelName;
-    });
-    this.postMessageToChannel(this.channels[chIdx].name, opening +
+    this.postMessageToChannel(channelName, opening +
         "\n I'm a bot that will compliment you or roast you. Just say `roast me` or " +
         "`compliment me` or " + this.name + " and I'll hit you with reddit's best");
 };
 
 RedditBot.prototype._onMessage = function(message) {
-
     if (this._isChatMessage(message) &&
         this._isChannelConversation(message) &&
         !this._isFromRedditbot(message) &&
         this._isMentioningRedditbot(message)) {
-
-        this._replyWithRandomRemark(message);
+    	this._replyWithRandomRemark(message);
     }
 }
 
@@ -92,9 +93,9 @@ RedditBot.prototype._isMentioningRedditbot = function(message) {
 }
 
 RedditBot.prototype._replyWithRandomRemark = function(message) {
-	var self = this;
+    var self = this;
     webapi.userInfo(message.user, function(user) {
-    	console.log('user', user)
+        //console.log('user', user)
         if (!user) {
             console.log('error on userinfo');
             return;
@@ -107,10 +108,10 @@ RedditBot.prototype._replyWithRandomRemark = function(message) {
 
 
         userName = user.name;
-
-        self.postMessageToChannel(self.channels[chIdx].name, '@' + userName);
+        scraper.getRoast(function(roast) {
+            self.postMessageToChannel(channelName, '@' + userName + ' ' + roast);
+        });
     })
-
 }
 
 module.exports = RedditBot;
