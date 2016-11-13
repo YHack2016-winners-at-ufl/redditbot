@@ -7,6 +7,7 @@ var request = require('request');
 var cheerio = require('cheerio');
 var bot = require('./redditbot');
 var _ = require('underscore');
+var Chain = require('markov-chains').default;
 var app     = express();
 
 function Roast(message,votes){
@@ -23,6 +24,7 @@ var scraper = {
     counter: 0,
     url: 'https://www.reddit.com/r/RoastMe/',
     roasts: [],
+    states: [],
     scrapeReddit: function(callback) {
         var that = this;
         //All the web scraping magic will happen here
@@ -107,7 +109,30 @@ var scraper = {
     getRoast: function(callback){
         var msg = this.roasts[this.counter];
         this.counter++;
+        console.log(msg);
+        console.log(msg.msg);
         callback(msg.msg);
+    },
+    fillStates: function() {
+        console.log("inside fillStates");
+        console.log("this.roasts.length: " + this.roasts.length);
+        //console.log("this.roasts[0].msg: " + this.roasts[0].msg);
+        for (var i = 0; i < this.roasts.length; i++) {
+            this.states[i] = (new Array(this.roasts[i].msg));
+            //console.log("this.states[i]: " + this.states[i]);
+        }
+        //console.log("this.states: " + this.states);
+    },
+    generateRoast: function(callback) {
+        console.log("inside generateRoast");
+        this.fillStates();
+        var chain = new Chain(this.states);
+        // generate a forecast 
+        const markovRoast = chain.walk(); 
+        console.log("markov roast: " + markovRoast);
+
+        var roast = markovRoast[0];
+        callback(roast);
     }
 }
 

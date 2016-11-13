@@ -29,6 +29,7 @@ RedditBot.prototype.run = function() {
 };
 
 RedditBot.prototype._onStart = function() {
+
     this._loadBotUser();
     var that = this;
 
@@ -36,7 +37,7 @@ RedditBot.prototype._onStart = function() {
         //console.log("test: ", msg);
         //that._replyWithRandomRemark(msg);
     });
-    //this._giveInsultGreeting();
+
 };
 
 RedditBot.prototype._loadBotUser = function() {
@@ -63,11 +64,14 @@ RedditBot.prototype._giveGreeting = function() {
 };
 
 RedditBot.prototype._onMessage = function(message) {
+
     if (this._isChatMessage(message) &&
         this._isChannelConversation(message) &&
         !this._isFromRedditbot(message) &&
         this._isMentioningRedditbot(message)) {
+
     	this._replyWithRandomRemark(message);
+    	this._replyWithMarkovRemark(message);
     }
 }
 
@@ -93,6 +97,7 @@ RedditBot.prototype._isMentioningRedditbot = function(message) {
 }
 
 RedditBot.prototype._replyWithRandomRemark = function(message) {
+
     var self = this;
     webapi.userInfo(message.user, function(user) {
         //console.log('user', user)
@@ -109,9 +114,18 @@ RedditBot.prototype._replyWithRandomRemark = function(message) {
 
         userName = user.name;
         scraper.getRoast(function(roast) {
-            self.postMessageToChannel(channelName, '@' + userName + ' ' + roast);
+            self.postMessageToChannel(channelName, '@' + userName + ' ' + "Reddit thought this about you: " + roast);
         });
-    })
+    });
+}
+
+RedditBot.prototype._replyWithMarkovRemark = function(message) {
+	var that = this;
+	scraper.generateRoast(function(roast){
+		//console.log("test: " ,roast);
+		that.postMessageToChannel('general', "Here's something I came up with myself: \n" + roast);
+	});
+
 }
 
 module.exports = RedditBot;

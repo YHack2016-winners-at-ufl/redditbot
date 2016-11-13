@@ -17,10 +17,16 @@
   },
   "homepage": "https://github.com/YHack2016-winners-at-ufl/redditbot#readme",
   "dependencies": {
+    "E": "0.0.1",
     "cheerio": "0.22.0",
     "express": "4.14.0",
     "lodash": "^4.16.6",
+<<<<<<< Updated upstream
     "request": "^2.78.0",
+=======
+    "markov-chains": "^1.0.2",
+    "request": "2.78.0",
+>>>>>>> Stashed changes
     "slackbots": "^0.5.3",
     "underscore": "^1.8.3"
   }
