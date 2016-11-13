@@ -13,7 +13,7 @@ var app     = express();
 
 
 function Roast(message,votes, score){
-    this.msg = message || "";
+    this.msg = message || "test";
     this.upvotes = votes || 0;
     this.score = score || 0;
 }

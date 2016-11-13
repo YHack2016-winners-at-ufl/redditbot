@@ -115,7 +115,7 @@ RedditBot.prototype._replyWithRandomRemark = function(message) {
 
         userName = user.name;
         scraper.getRoast(function(roast) {
-            self.postMessageToChannel('joshtest', '@' + userName + ' ' + "Reddit thought this about you: \n" + roast.msg + "Sentiment Score Analysis: " + roast.score.score, function(){
+            self.postMessageToChannel('joshtest', '@' + userName + ' ' + "Reddit thought this about you: \n" + roast.msg + "\t Sentiment Score Analysis: " + roast.score.score, function(){
               var s1 = sentiment(roast);
               self.postMessageToChannel('joshtest', "callback value is: " + s1);
             });
@@ -135,7 +135,7 @@ RedditBot.prototype._replyWithMarkovRemark = function(message) {
 
 
 	scraper.generateRoast(function(roast){
-		that.postMessageToChannel('random', "Here's something I came up with myself: \n" + roast.msg + "Sentiment Score Analysis: " + roast.score.score,function(){
+		that.postMessageToChannel('random', "Here's something I came up with myself: \n" + roast.msg + "\t Sentiment Score Analysis: " + roast.score.score,function(){
       var s1 = sentiment(roast);
       self.postMessageToChannel('joshtest', "callback value is: " + s1);
     });

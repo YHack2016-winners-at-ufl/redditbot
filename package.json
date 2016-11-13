@@ -18,6 +18,7 @@
   "homepage": "https://github.com/YHack2016-winners-at-ufl/redditbot#readme",
   "dependencies": {
     "E": "0.0.1",
+    "chart.js": "2.4.0",
     "cheerio": "0.22.0",
     "express": "4.14.0",
     "lodash": "^4.16.6",
