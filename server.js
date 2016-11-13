@@ -23,7 +23,9 @@ var callback = function(roast){
 
 var scraper = {
     counter: 0,
-    url: 'https://www.reddit.com/r/RoastMe/',
+    //Top 2 pages of Top RoastMe for this week
+    url: ['https://www.reddit.com/r/RoastMe/top/?sort=top&t=week',
+        "https://www.reddit.com/r/RoastMe/top/?sort=top&t=week&count=25&after=t3_5c0wn5"],
     roasts: [],
     states: [],
     scrapeReddit: function(callback) {
@@ -33,8 +35,8 @@ var scraper = {
         // The structure of our request call
         // The first parameter is our URL
         // The callback function takes 3 parameters, an error, response status code and the html
-
-        request( this.url, function (error, response, html) {
+        this.url.forEach(function(url){
+            request( url, function (error, response, html) {
 
             // First we'll check to make sure no errors occurred when making the request
 
@@ -106,6 +108,8 @@ var scraper = {
                 });
             }
         } );
+        });
+
     },
     getRoast: function(callback){
         var msg = this.roasts[this.counter];

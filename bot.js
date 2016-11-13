@@ -9,6 +9,6 @@ var bot = new RedditBot(settings);
 bot.run();
 bot.on('start', function() {
 
-	bot.postMessageToChannel('general', 'Get ready to hear some bullshit');
+	bot.postMessageToChannel('joshtest', 'Get ready to hear some bullshit');
 });
 

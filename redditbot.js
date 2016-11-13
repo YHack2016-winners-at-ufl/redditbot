@@ -115,7 +115,7 @@ RedditBot.prototype._replyWithRandomRemark = function(message) {
 
         userName = user.name;
         scraper.getRoast(function(roast) {
-            self.postMessageToChannel(channelName, '@' + userName + ' ' + "Reddit thought this about you: " + roast);
+            self.postMessageToChannel('joshtest', '@' + userName + ' ' + "Reddit thought this about you: " + roast);
         });
     });
 };
@@ -128,7 +128,7 @@ RedditBot.prototype._replyWithMarkovRemark = function(message) {
 
 	scraper.generateRoast(function(roast){
 		//console.log("test: " ,roast);
-		that.postMessageToChannel('general', "Here's something I came up with myself: \n" + roast);
+		that.postMessageToChannel('joshtest', "Here's something I came up with myself: \n" + roast);
 	});
 };
 
