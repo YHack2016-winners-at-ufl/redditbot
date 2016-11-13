@@ -1,8 +1,8 @@
 var RedditBot = require('./redditbot');
 var fs = require('fs');
-
+var token = require('./config').bot;
 var settings = {
-    token: 'xoxb-103811241106-QIwFbuPamDbFbgiuBYQs9CJX',
+    token: token,
     name: 'redditbot'
 };
 
